@@ -2,14 +2,14 @@
 
 This repository focuses on Java and Spring, exploring microservices architecture and inter-service communication.
 
-## 📑 Context / Background
+### 📑 Context / Background
 
 The application is a ticket sales system, integrating user management, sales processing and notifications.
 
 Implemented in a backend composed of some microservices, along with a web-based administration interface to interact with the system.
 
 
-## 🚀 Stack
+### 🚀 Stack
 
 - Java 17+
 - Spring Boot
@@ -17,7 +17,7 @@ Implemented in a backend composed of some microservices, along with a web-based 
 - React (TypeScript)
 - Microservices Architecture
 
-## 📁 Project Structure
+### 📁 Project Structure
 
 ```bash
 .
@@ -25,7 +25,7 @@ Implemented in a backend composed of some microservices, along with a web-based 
 ├── ticket-sales-web/        # Admin web interface for management and visualization
 ```
 
-## Status
+### Status
 
 [🚧 WIP] Features are being rolled out gradually. Check out Issues and PRs.
 
