@@ -1,0 +1,42 @@
+services:
+  
+  pg-dbms:
+    image: postgres:17.6-alpine3.22
+    container_name: pg-dbms
+    restart: unless-stopped
+    environment:
+      DB_PORT: ${DB_PORT}
+      # Admin User
+      POSTGRES_USER: ${DB_ADMIN_USER}
+      POSTGRES_PASSWORD: ${DB_ADMIN_PASSWORD}
+      # App Users DB      
+      DB_USERS: ${DB_USERS}
+      DB_USERS_OWNER: ${DB_USERS_OWNER}
+      DB_USERS_PASSWORD: ${DB_USERS_PASSWORD}
+      # App Sales DB
+      DB_SALES: ${DB_SALES}
+      DB_SALES_OWNER: ${DB_SALES_OWNER}
+      DB_SALES_PASSWORD: ${DB_SALES_PASSWORD}
+      # App Notifications DB
+      DB_NOTIFICATIONS: ${DB_NOTIFICATIONS}
+      DB_NOTIFICATIONS_OWNER: ${DB_NOTIFICATIONS_OWNER}
+      DB_NOTIFICATIONS_PASSWORD: ${DB_NOTIFICATIONS_PASSWORD}      
+    ports:
+      - "9876:${DB_PORT}"
+
+    networks:
+      - backend
+    
+    volumes:
+      - ./volumes/pg_data:/var/lib/postgresql/data
+      # entrypoints
+      - ./database:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_ADMIN_USER}"]
+      interval: 5s
+      timeout: 3s
+      start_period: 3s
+      retries: 10
+
+networks:
+  backend:

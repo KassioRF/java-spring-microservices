@@ -1,0 +1,8 @@
+_local_dev
+
+.env*
+!.env.example
+
+ticket-sales-services/docker/volumes/**
+!ticket-sales-services/docker/volumes/.gitkeep
+
