@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+
+echo "Creating database and user for $DB_SALES"
+
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
+  CREATE USER "$DB_SALES_OWNER" WITH PASSWORD '$DB_SALES_PASSWORD';
+  CREATE DATABASE "$DB_SALES";
+  ALTER DATABASE "$DB_SALES" OWNER TO "$DB_SALES_OWNER";
+EOSQL
