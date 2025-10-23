@@ -3,6 +3,31 @@
 [WIP] Ticket Sales Services – Microservice architecture for managing users, sales, and notifications.
 
 ---
+## Microservices Overview
+
+Groups all microservices related to ticket sales. See individual folders for more details:
+  - [`users`](./tickets/users): User management microservice
+  <!-- - [`sales`](./sales): Ticket sales microservice (coming soon) -->
+  <!-- - [`notifications`](./notifications): Notification microservice (coming soon) -->
+
+### Building & Running
+
+Each microservice is a standalone Spring Boot application with its own `pom.xml`.
+To build and run each microservice, navigate to its folder and use Maven commands:
+
+```bash
+cd tickets/users # Navigate to the desired microservice folder (e.g., users, sales, notifications)
+
+# when running for the first time, add permission to the mvnw script
+# chmod +x mvnw
+
+# run the application
+./mvnw spring-boot:run
+
+```
+
+---
+
 
 ## Database
 
