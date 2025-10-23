@@ -12,6 +12,6 @@ public class HealthCheckController {
     @GetMapping("/")
     public ResponseEntity<Map<String, String>> healthCheck() {
         return ResponseEntity.ok(
-                Map.of("message", "User Service is up and running teste teste"));
+                Map.of("message", "User Service is up and running"));
     }
 }
