@@ -26,8 +26,6 @@ public class HealthCheckController {
     /**
      * Root endpoint for health check. Returns a simple message indicating that
      * the service is operational.
-     *
-     * @return ResponseEntity with a status message in JSON format.
      * 
      * Example response:
      * 
@@ -37,6 +35,8 @@ public class HealthCheckController {
      * }
      * </pre>
      *
+     * @return ResponseEntity with a status message in JSON format.
+     * 
      */
     @GetMapping("/")
     public ResponseEntity<Map<String, String>> healthCheck() {

@@ -11,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -32,26 +33,33 @@ import lombok.Setter;
  * {@link org.hibernate.annotations.SQLRestriction} filter.
  * </p>
  *
- * <p><b>Soft delete behavior:</b></p>
+ * <p>
+ * <b>Soft delete behavior:</b>
+ * </p>
  * <ul>
- *   <li>Deleting via repository or EntityManager triggers 
- *   {@code UPDATE credit_card_networks SET deleted_at = NOW()}.</li>
- *   <li>Queries automatically ignore rows where {@code deleted_at IS NOT NULL}.</li>
- *   <li>Physical deletion can still be performed manually if required.</li>
+ * <li>Deleting via repository or EntityManager triggers
+ * {@code UPDATE credit_card_networks SET deleted_at = NOW()}.</li>
+ * <li>Queries automatically ignore rows where
+ * {@code deleted_at IS NOT NULL}.</li>
+ * <li>Physical deletion can still be performed manually if required.</li>
  * </ul>
  *
- * <p><b>Auditing:</b> The fields {@code createdAt} and {@code updatedAt}
+ * <p>
+ * <b>Auditing:</b> The fields {@code createdAt} and {@code updatedAt}
  * are managed automatically via {@link jakarta.persistence.PrePersist}
- * and {@link jakarta.persistence.PreUpdate} lifecycle hooks.</p>
+ * and {@link jakarta.persistence.PreUpdate} lifecycle hooks.
+ * </p>
  */
 @Entity
-@Table(name = "credit_card_networks")
+@Table(name = "credit_card_network", indexes = {
+        @Index(name = "idx_ccnetwork_name", columnList = "name ASC")
+})
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@SQLDelete(sql = "UPDATE credit_card_networks SET deleted_at = NOW() WHERE id = ?")
+@SQLDelete(sql = "UPDATE credit_card_network SET deleted_at = NOW() WHERE id = ?")
 @SQLRestriction("deleted_at IS NULL")
 public class CreditCardNetworkEntity {
 
@@ -59,8 +67,12 @@ public class CreditCardNetworkEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(nullable = false, unique = true, columnDefinition = "varchar(100)")
     private String name;
+
+    private String description;
+
+    private Double tax;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
