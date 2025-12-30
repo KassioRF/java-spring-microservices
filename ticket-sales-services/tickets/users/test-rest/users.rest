@@ -1,0 +1,19 @@
+@urlServer = http://localhost:3000
+
+### GET Healthcheck
+GET {{urlServer}}
+
+
+# ------------------------------------
+# Users routes
+# ------------------------------------
+
+### POST :: Create User
+POST {{urlServer}}/users
+Content-Type: application/json
+
+{
+    "name": "Dummy User One",
+    "email": "dummy-one@email.com",
+    "password": "secret-stuff"
+}

@@ -1,6 +1,7 @@
 package com.acme.tickets.users.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import com.acme.tickets.users.service.CCNetworkService;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/ccn")
@@ -29,9 +31,21 @@ public class CCNetworkController {
         return ResponseEntity.ok(responseDto);
     }
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<CCNetworkDTO>> getAll() {
         return ResponseEntity.ok(service.getAll());
+    }
+
+    @GetMapping("/id/{ccnId}")
+    public ResponseEntity<CCNetworkDTO> findById(@PathVariable(value = "ccnId") UUID id) {
+        CCNetworkDTO responseDto = service.findById(id);
+        return ResponseEntity.ok(responseDto);
+    }
+
+    @GetMapping("/name/{ccnName}")
+    public ResponseEntity<List<CCNetworkDTO>> findByName(@PathVariable(value = "ccnName") String name) {
+        List<CCNetworkDTO> responseDto = service.findByName(name);
+        return ResponseEntity.ok(responseDto);
     }
 
 }
