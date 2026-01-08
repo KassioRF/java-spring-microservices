@@ -1,8 +1,8 @@
 {
-  "editor.rulers": [
-    90
-  ],
-  "files.insertFinalNewline": true,
-  "editor.formatOnSave": true,
-  "editor.tabSize": 4
+    "editor.rulers": [
+        100
+    ],
+    "files.insertFinalNewline": true,
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4
 }
