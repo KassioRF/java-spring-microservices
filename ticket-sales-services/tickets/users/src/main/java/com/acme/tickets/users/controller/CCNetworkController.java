@@ -43,7 +43,8 @@ public class CCNetworkController {
     }
 
     @GetMapping("/name/{ccnName}")
-    public ResponseEntity<List<CCNetworkDTO>> findByName(@PathVariable(value = "ccnName") String name) {
+    public ResponseEntity<List<CCNetworkDTO>> findByName(
+            @PathVariable(value = "ccnName") String name) {
         List<CCNetworkDTO> responseDto = service.findByName(name);
         return ResponseEntity.ok(responseDto);
     }

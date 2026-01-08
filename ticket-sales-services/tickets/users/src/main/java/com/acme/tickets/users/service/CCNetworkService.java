@@ -43,9 +43,7 @@ public class CCNetworkService {
     // Get All
     public List<CCNetworkDTO> getAll() {
         List<CreditCardNetworkEntity> items = repository.findAll();
-        return items.stream()
-                .map(CCNetworkConverter::toDto)
-                .toList();
+        return items.stream().map(CCNetworkConverter::toDto).toList();
     }
 
     // Get by id
@@ -66,9 +64,7 @@ public class CCNetworkService {
     // Get by Name
     public List<CCNetworkDTO> findByName(String name) {
         List<CreditCardNetworkEntity> qResult = repository.findByNameContainingIgnoreCase(name);
-        return qResult.stream()
-                .map(CCNetworkConverter::toDto)
-                .toList();
+        return qResult.stream().map(CCNetworkConverter::toDto).toList();
     }
 
     // Update

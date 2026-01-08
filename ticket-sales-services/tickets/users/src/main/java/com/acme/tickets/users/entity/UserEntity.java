@@ -26,14 +26,14 @@ import lombok.Setter;
 /**
  * Represents a user within the ticket sales system.
  * <p>
- * This entity stores user information, including identification,
- * authentication data, and credit card details. Each user is associated
- * with a {@link CreditCardNetworkEntity}, defining the card brand (e.g., Visa, MasterCard).
+ * This entity stores user information, including identification, authentication data, and
+ * credit card details. Each user is associated with a {@link CreditCardNetworkEntity},
+ * defining the card brand (e.g., Visa, MasterCard).
  * </p>
  *
- * <p><b>Lifecycle:</b> 
- * The fields {@code createdAt} and {@code updatedAt}
- * are automatically managed by {@link PrePersist} and {@link PreUpdate} callbacks.
+ * <p>
+ * <b>Lifecycle:</b> The fields {@code createdAt} and {@code updatedAt} are automatically
+ * managed by {@link PrePersist} and {@link PreUpdate} callbacks.
  * </p>
  */
 @Entity

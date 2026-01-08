@@ -13,25 +13,17 @@ public class CCNetworkConverter {
 
     // DTO to Domain
     public static CCNetworkDomain toDomain(CreateCCNetworkDTO dto) {
-        return CCNetworkDomain.builder()
-                .name(dto.name())
-                .build();
+        return CCNetworkDomain.builder().name(dto.name()).build();
     }
 
     // Entity to Domain
     public static CCNetworkDomain toDomain(CreditCardNetworkEntity entity) {
-        return CCNetworkDomain.builder()
-                .id(entity.getId())
-                .name(entity.getName())
-                .build();
+        return CCNetworkDomain.builder().id(entity.getId()).name(entity.getName()).build();
     }
 
     // Domain to Entity (JPA)
     public static CreditCardNetworkEntity toEntity(CCNetworkDomain domain) {
-        return CreditCardNetworkEntity.builder()
-                .id(domain.getId())
-                .name(domain.getName())
-                .build();
+        return CreditCardNetworkEntity.builder().id(domain.getId()).name(domain.getName()).build();
     }
 
     // Entity to DTO

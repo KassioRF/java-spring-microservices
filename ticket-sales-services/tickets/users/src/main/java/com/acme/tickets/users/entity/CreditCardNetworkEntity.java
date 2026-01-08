@@ -25,11 +25,10 @@ import lombok.Setter;
  * Represents a credit card network (e.g., Visa, MasterCard, etc.).
  * 
  * <p>
- * This entity serves as a reference for users' credit card information.
- * It supports a <b>soft delete</b> policy, meaning that when a record is
- * deleted, it is not physically removed from the database. Instead,
- * the {@code deletedAt} field is populated with the current timestamp,
- * and the entity is automatically excluded from queries by the
+ * This entity serves as a reference for users' credit card information. It supports a
+ * <b>soft delete</b> policy, meaning that when a record is deleted, it is not physically
+ * removed from the database. Instead, the {@code deletedAt} field is populated with the
+ * current timestamp, and the entity is automatically excluded from queries by the
  * {@link org.hibernate.annotations.SQLRestriction} filter.
  * </p>
  *
@@ -39,21 +38,19 @@ import lombok.Setter;
  * <ul>
  * <li>Deleting via repository or EntityManager triggers
  * {@code UPDATE credit_card_networks SET deleted_at = NOW()}.</li>
- * <li>Queries automatically ignore rows where
- * {@code deleted_at IS NOT NULL}.</li>
+ * <li>Queries automatically ignore rows where {@code deleted_at IS NOT NULL}.</li>
  * <li>Physical deletion can still be performed manually if required.</li>
  * </ul>
  *
  * <p>
- * <b>Auditing:</b> The fields {@code createdAt} and {@code updatedAt}
- * are managed automatically via {@link jakarta.persistence.PrePersist}
- * and {@link jakarta.persistence.PreUpdate} lifecycle hooks.
+ * <b>Auditing:</b> The fields {@code createdAt} and {@code updatedAt} are managed
+ * automatically via {@link jakarta.persistence.PrePersist} and
+ * {@link jakarta.persistence.PreUpdate} lifecycle hooks.
  * </p>
  */
 @Entity
 @Table(name = "credit_card_network", indexes = {
-        @Index(name = "idx_ccnetwork_name", columnList = "name ASC")
-})
+        @Index(name = "idx_ccnetwork_name", columnList = "name ASC") })
 @Getter
 @Setter
 @NoArgsConstructor

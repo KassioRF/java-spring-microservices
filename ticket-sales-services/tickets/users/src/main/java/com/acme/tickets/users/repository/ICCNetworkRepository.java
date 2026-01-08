@@ -19,13 +19,11 @@ public interface ICCNetworkRepository extends JpaRepository<CreditCardNetworkEnt
     List<CreditCardNetworkEntity> findByDescription(String description);
 
     // Tax queries, just testing the sintax..
-    @Query(value = "SELECT cce FROM CreditCardNetworkEntity cce " +
-            "WHERE cce.tax = :tax")
+    @Query(value = "SELECT cce FROM CreditCardNetworkEntity cce " + "WHERE cce.tax = :tax")
     Optional<CreditCardNetworkEntity> searchByTax(@Param("tax") Double tax);
 
     // Using native query...
-    @Query(value = " select * from credit_card_network " +
-            " where tax = :tax ", nativeQuery = true)
+    @Query(value = " select * from credit_card_network " + " where tax = :tax ", nativeQuery = true)
     Optional<CreditCardNetworkEntity> searchByTaxNative(@Param("tax") Double tax);
 
 }
