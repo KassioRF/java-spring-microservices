@@ -5,15 +5,48 @@ GET {{urlServer}}
 
 
 # ------------------------------------
-# Users routes
+# User routes
 # ------------------------------------
 
-### POST :: Create User
+
+### GET ALL Available Users
+GET {{urlServer}}/users
+
+### Get By ID 
+GET {{urlServer}}/users/id/3353c485-46ba-483b-9d74-379940192045
+
+### Get by invalid id
+GET {{urlServer}}/users/id/3353c485-46ba-483b-9d74-379940192044
+
+### Get By Name
+GET {{urlServer}}/users/name/eugenes
+
+
+### POST  Register new User
 POST {{urlServer}}/users
 Content-Type: application/json
 
 {
-    "name": "Dummy User One",
-    "email": "dummy-one@email.com",
-    "password": "secret-stuff"
+    "name": "Foo bar",
+    "email": "foo.bar@email.com",
+    "password": "super-secret",
+    "city": "Gotam",
+    "creditCardNumber": "123123123",
+    "ccNetworkId": "75abc2e2-8d1c-4d96-a5cf-a1e50d5c3389"
+
 }
+
+### POST  Register new User
+POST {{urlServer}}/users
+Content-Type: application/json
+
+{
+    "name": "Eugene Simons",
+    "email": "eugene.simons@email.com",
+    "password": "super-secret",
+    "city": "Metropolis",
+    "creditCardNumber": "1231231234",
+    "ccNetworkId": "af901d1b-12e2-4eec-90b2-3c0f7ecd8d0d"
+
+}
+
