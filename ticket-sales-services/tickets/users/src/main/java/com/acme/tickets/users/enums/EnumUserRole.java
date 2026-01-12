@@ -18,13 +18,13 @@ import lombok.Getter;
  * 
  * <pre>{@code
  * 
- * EnumUserType type = EnumUserType.CUSTOMER;
+ * EnumUserRole type = EnumUserRole.CUSTOMER;
  * System.out.println(type.getDescription()); // "Customer"
  * }</pre>
  */
 @Getter
 @AllArgsConstructor
-public enum EnumUserType {
+public enum EnumUserRole {
 
     /** Regular customer who buys tickets */
     CUSTOMER(1, "Customer"),
