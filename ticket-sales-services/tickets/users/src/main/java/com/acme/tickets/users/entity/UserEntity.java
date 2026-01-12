@@ -3,7 +3,7 @@ package com.acme.tickets.users.entity;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import com.acme.tickets.users.enums.EnumUserType;
+import com.acme.tickets.users.enums.EnumUserRole;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -58,9 +58,12 @@ public class UserEntity {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "city", nullable = false)
+    private String city;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
-    private EnumUserType role;
+    private EnumUserRole role;
 
     @Column(name = "active", nullable = false, columnDefinition = "boolean default true")
     private Boolean active;
