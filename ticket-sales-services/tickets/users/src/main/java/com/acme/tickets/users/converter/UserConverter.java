@@ -60,7 +60,8 @@ public class UserConverter {
         return new UserDTO(
                 domain.getId(),
                 domain.getName(),
-                domain.getEmail());
+                domain.getEmail(),
+                domain.getCity());
     }
 
     // Entity to DTO
