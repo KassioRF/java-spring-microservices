@@ -28,7 +28,7 @@ Content-Type: application/json
 
 {
     "name": "Foo bar",
-    "email": "foo.bar@email.com",
+    "email": "foo.bar3@email.com",
     "password": "super-secret",
     "city": "Gotam",
     "creditCardNumber": "123123123",
@@ -50,3 +50,27 @@ Content-Type: application/json
 
 }
 
+
+### PUT  Update User Profile
+PUT {{urlServer}}/users/profile
+Content-Type: application/json
+
+{
+
+    "id": "078a738e-6bf2-467f-bc7c-d382e050f1b5",
+    "name": "Foo bar",
+    "city": "Gotham"
+
+}
+
+### PUT  Update User Credit Card
+PUT {{urlServer}}/users/credit-card
+Content-Type: application/json
+
+{
+
+    "userId": "b4eea88c-7e0b-40fc-a88a-f0b9b249ee98",
+    "creditCardNumber": "9999999999",
+    "ccNetworkId": "af901d1b-12e2-4eec-90b2-3c0f7ecd8d0d"
+
+}
