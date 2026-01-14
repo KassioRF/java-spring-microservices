@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.acme.tickets.users.dto.CreateUserDTO;
 import com.acme.tickets.users.dto.DeleteUserDTO;
+import com.acme.tickets.users.dto.UpdateUserCreditCardDTO;
 import com.acme.tickets.users.dto.UpdateUserDTO;
 import com.acme.tickets.users.dto.UserDTO;
 import com.acme.tickets.users.service.UserService;
@@ -35,9 +36,17 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @PutMapping("path/{id}")
-    public ResponseEntity<UserDTO> update(@RequestBody UpdateUserDTO payload) {
-        UserDTO user = userService.update(payload);
+    @PutMapping("profile")
+    public ResponseEntity<UserDTO> updateProfile(
+            @RequestBody UpdateUserDTO payload) {
+        UserDTO user = userService.updateProfile(payload);
+        return ResponseEntity.ok(user);
+    }
+
+    @PutMapping("credit-card")
+    public ResponseEntity<UserDTO> updateCreditCard(
+            @RequestBody UpdateUserCreditCardDTO payload) {
+        UserDTO user = userService.updateCreditCard(payload);
         return ResponseEntity.ok(user);
     }
 
@@ -54,7 +63,8 @@ public class UserController {
     }
 
     @GetMapping("id/{userId}")
-    public ResponseEntity<UserDTO> getById(@PathVariable(value = "userId") UUID id) {
+    public ResponseEntity<UserDTO> getById(
+            @PathVariable(value = "userId") UUID id) {
 
         Optional<UserDTO> userOptional = userService.getById(id);
 
@@ -66,10 +76,9 @@ public class UserController {
     }
 
     @GetMapping("name/{name}")
-    public ResponseEntity<List<UserDTO>> getByName(@PathVariable(value = "name") String name) {
+    public ResponseEntity<List<UserDTO>> getByName(
+            @PathVariable(value = "name") String name) {
         List<UserDTO> users = userService.getByName(name);
-        // return users.isEmpty() ? ResponseEntity.noContent().build() :
-        // ResponseEntity.ok(users);
         return ResponseEntity.ok(users);
     }
 

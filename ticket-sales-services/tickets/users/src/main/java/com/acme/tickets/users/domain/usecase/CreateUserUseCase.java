@@ -9,99 +9,99 @@ import org.springframework.stereotype.Component;
 import com.acme.tickets.users.domain.CCNetworkDomain;
 import com.acme.tickets.users.domain.UserDomain;
 import com.acme.tickets.users.domain.port.CCNetworkRepositoryPort;
+import com.acme.tickets.users.domain.port.UserRepositoryPort;
 import com.acme.tickets.users.enums.EnumUserRole;
 import com.acme.tickets.users.exception.UseCaseException;
-import com.acme.tickets.users.repository.IUserRepository;
 
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
-@RequiredArgsConstructor
 @Component
+@RequiredArgsConstructor
 public class CreateUserUseCase {
 
-    @Setter
-    private UserDomain domain;
-    private final IUserRepository repository;
+    private final UserRepositoryPort userRepositoryPort;
     private final CCNetworkRepositoryPort ccnRepositoryPort;
 
-    public void validate() {
+    public UserDomain validate(UserDomain domain) {
 
-        validateCCNetworkId();
-        validateCreditCardNumber();
+        validateCCNetworkId(domain);
+        validateCreditCardNumber(domain);
 
-        validateName();
-        validateEmail();
-        validatePassword();
-        validateCity();
-        validateUserRole();
+        validateName(domain);
+        validateEmail(domain);
+        validatePassword(domain);
+        validateCity(domain);
+        validateUserRole(domain);
+
+        return domain;
 
     }
 
     // Validations
-    private void validateName() {
-        if (this.domain.getName() == null) {
-            throw new UseCaseException("Name is null.");
-        }
-    }
-
-    private void validateCCNetworkId() {
-        if (this.domain.getCcNetwork() == null) {
+    private void validateCCNetworkId(UserDomain domain) {
+        if (domain.getCcNetwork() == null) {
             throw new UseCaseException("Invalid Credit Card Network.");
         }
 
-        UUID ccnId = this.domain.getCcNetwork().getId();
+        UUID ccnId = domain.getCcNetwork().getId();
 
         if (ccnId == null) {
             throw new UseCaseException("Credit Card Network ID is null.");
         }
 
-        Optional<CCNetworkDomain> ccNetworkDomain = ccnRepositoryPort.findById(ccnId);
+        Optional<CCNetworkDomain> ccNetworkDomain = ccnRepositoryPort
+                .findById(ccnId);
 
         if (ccNetworkDomain.isEmpty()) {
-            throw new UseCaseException("Credit Card Network ID does not exist.");
+            throw new UseCaseException(
+                    "Credit Card Network ID does not exist.");
         }
 
-        this.domain.setCcNetwork(ccNetworkDomain.get());
+        domain.setCcNetwork(ccNetworkDomain.get());
 
     }
 
-    private void validateEmail() {
-        if (this.domain.getEmail() == null) {
-            System.out.println("Email is null: " + this.domain.getEmail());
-            throw new UseCaseException("E-mail is null.");
-        }
-
-        // If email already exists
-        if (this.repository.findByEmail(this.domain.getEmail()).isPresent()) {
-            throw new UseCaseException("E-mail already exists.");
-        }
-    }
-
-    private void validatePassword() {
-        if (this.domain.getPassword() == null) {
-            throw new UseCaseException("Password is null.");
-        }
-    }
-
-    private void validateCity() {
-
-        // @TODO: Implement city validation logic
-        if (this.domain.getCity() == null) {
-            throw new UseCaseException("City is null.");
-        }
-    }
-
-    private void validateCreditCardNumber() {
-        // @TODO: Implement a better CCNumber validation logic
-        if (this.domain.getCreditCardNumber() == null) {
+    private void validateCreditCardNumber(UserDomain domain) {
+        // @TODO: Implement the logic for credit card number validation
+        if (domain.getCreditCardNumber() == null) {
             throw new UseCaseException("Credit Card Number is null.");
         }
     }
 
-    private void validateUserRole() {
-        if (Objects.isNull(this.domain.getRole())) {
-            this.domain.setRole(EnumUserRole.CUSTOMER);
+    private void validateName(UserDomain domain) {
+        if (domain.getName() == null) {
+            throw new UseCaseException("Name is null.");
+        }
+    }
+
+    private void validateEmail(UserDomain domain) {
+        if (domain.getEmail() == null) {
+            throw new UseCaseException("E-mail is null.");
+        }
+
+        // If email already exists
+        if (userRepositoryPort.existsByEmail(domain.getEmail())) {
+            throw new UseCaseException("E-mail already exists.");
+        }
+    }
+
+    private void validatePassword(UserDomain domain) {
+        if (domain.getPassword() == null) {
+            throw new UseCaseException("Password is null.");
+        }
+    }
+
+    private void validateCity(UserDomain domain) {
+
+        // @TODO: Implement city validation logic
+        if (domain.getCity() == null) {
+            throw new UseCaseException("City is null.");
+        }
+    }
+
+    private void validateUserRole(UserDomain domain) {
+        if (Objects.isNull(domain.getRole())) {
+            domain.setRole(EnumUserRole.CUSTOMER);
         }
     }
 
