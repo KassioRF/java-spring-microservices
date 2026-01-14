@@ -1,5 +1,11 @@
 {
-    "editor.rulers": [90],
+    "editor.rulers": [
+        100
+    ],
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "always"
+    },
     "files.insertFinalNewline": true,
     "editor.formatOnSave": true,
+    "editor.tabSize": 4
 }

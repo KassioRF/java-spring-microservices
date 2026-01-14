@@ -1,0 +1,48 @@
+@urlServer = http://localhost:3000
+
+### GET Healthcheck
+GET {{urlServer}}
+
+
+# ------------------------------------
+# CCNetwork routes
+# ------------------------------------
+
+### GET ALL Available Credit Card Networks
+GET {{urlServer}}/ccn/
+
+### Get By ID 
+@ccNetworkMaster = 75abc2e2-8d1c-4d96-a5cf-a1e50d5c3389
+GET {{urlServer}}/ccn/id/{{ccNetworkMaster}}
+
+### Get by invalid id
+GET {{urlServer}}/ccn/id/5f32b53f-3a56-4c36-a5a2-cf8703837ab5
+
+
+### Get By Name
+GET {{urlServer}}/ccn/name/viSa
+
+### Get By Name
+GET {{urlServer}}/ccn/name/MASTER
+
+
+### Get By Name (non-existent)
+GET {{urlServer}}/ccn/name/AmericanExpress
+
+
+
+### POST  Register new Credit Card Networks
+POST {{urlServer}}/ccn
+Content-Type: application/json
+
+{
+    "name": "Master"
+}
+
+### 
+POST {{urlServer}}/ccn
+Content-Type: application/json
+
+{
+    "name": "Visa"
+}
