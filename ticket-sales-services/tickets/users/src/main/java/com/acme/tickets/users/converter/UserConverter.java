@@ -37,6 +37,7 @@ public class UserConverter {
                 .city(entity.getCity())
                 .creditCardNumber(entity.getCreditCardNumber())
                 .ccNetwork(CCNetworkConverter.toDomain(entity.getCreditCardNetwork()))
+                .active(entity.getActive())
                 .role(entity.getRole())
                 .build();
     }
@@ -51,6 +52,7 @@ public class UserConverter {
                 .city(domain.getCity())
                 .creditCardNumber(domain.getCreditCardNumber())
                 .creditCardNetwork(CCNetworkConverter.toEntity(domain.getCcNetwork()))
+                .active(domain.getActive())
                 .role(domain.getRole())
                 .build();
     }

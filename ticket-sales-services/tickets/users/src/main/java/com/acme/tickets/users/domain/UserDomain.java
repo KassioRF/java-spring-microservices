@@ -26,6 +26,7 @@ public class UserDomain {
     private String creditCardNumber;
     private CCNetworkDomain ccNetwork;
 
+    private Boolean active;
     private EnumUserRole role;
 
     private LocalDateTime createdAt;
