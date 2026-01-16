@@ -11,7 +11,7 @@ import com.acme.tickets.users.domain.CCNetworkDomain;
 import com.acme.tickets.users.dto.CCNetworkDTO;
 import com.acme.tickets.users.dto.CreateCCNetworkDTO;
 import com.acme.tickets.users.entity.CreditCardNetworkEntity;
-import com.acme.tickets.users.exception.ServiceException;
+import com.acme.tickets.users.exception.UseCaseException;
 import com.acme.tickets.users.repository.ICCNetworkRepository;
 
 import lombok.AllArgsConstructor;
@@ -28,7 +28,7 @@ public class CCNetworkService {
         // DTO to Domain
         CCNetworkDomain domain = CCNetworkConverter.toDomain(dto);
         if (domain.getName() == null || domain.getName().isBlank()) {
-            return null;
+            throw new UseCaseException("Credit Card Network name is null.");
         }
 
         // Domain to Entity
@@ -51,7 +51,8 @@ public class CCNetworkService {
         Optional<CreditCardNetworkEntity> qResult = repository.findById(id);
 
         if (qResult.isEmpty()) {
-            throw new ServiceException("Credit Card Network ID dos not exist");
+            // throw new ServiceException("Credit Card Network ID dos not exist");
+            throw new UseCaseException("Credit Card Network ID dos not exist.");
         }
 
         CreditCardNetworkEntity entity = qResult.get();

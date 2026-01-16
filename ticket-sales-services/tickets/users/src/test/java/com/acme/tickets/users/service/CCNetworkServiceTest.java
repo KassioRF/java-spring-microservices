@@ -18,7 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.acme.tickets.users.dto.CCNetworkDTO;
 import com.acme.tickets.users.dto.CreateCCNetworkDTO;
 import com.acme.tickets.users.entity.CreditCardNetworkEntity;
-import com.acme.tickets.users.exception.ServiceException;
+import com.acme.tickets.users.exception.UseCaseException;
 import com.acme.tickets.users.repository.ICCNetworkRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -45,12 +45,12 @@ class CCNetworkServiceTest {
     }
 
     @Test
-    void shouldReturnNullWhenCreatingWithInvalidName() {
+    void shouldThrowExceptionWhenCreatingWithInvalidName() {
         CreateCCNetworkDTO dto = new CreateCCNetworkDTO(" ");
+        UseCaseException exception = assertThrows(UseCaseException.class,
+                () -> service.create(dto));
 
-        CCNetworkDTO result = service.create(dto);
-
-        assertEquals(null, result);
+        assertEquals("Credit Card Network name is null.", exception.getMessage());
     }
 
     @Test
@@ -60,8 +60,10 @@ class CCNetworkServiceTest {
         when(repository.findById(id))
                 .thenReturn(Optional.empty());
 
-        assertThrows(ServiceException.class,
+        UseCaseException exception = assertThrows(UseCaseException.class,
                 () -> service.findById(id));
+
+        assertEquals("Credit Card Network ID dos not exist.", exception.getMessage());
     }
 
     @Test
