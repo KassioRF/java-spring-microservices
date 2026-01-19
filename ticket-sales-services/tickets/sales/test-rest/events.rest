@@ -1,0 +1,92 @@
+@urlServer = http://localhost:4000
+
+### GET Healthcheck
+GET {{urlServer}}
+
+# ------------------------------------
+# Events Routes
+# ------------------------------------
+### GET - All available Events
+GET {{urlServer}}/events
+
+
+### GET - Find by id
+GET {{urlServer}}/events/id/3f35449c-6954-47eb-a4da-084d3cf35dca
+
+
+### GET - Find by Name
+GET {{urlServer}}/events/name/2026
+
+
+### GET - Find by Type
+GET {{urlServer}}/events/type/TEATRO
+
+### POST - Create new Event
+POST {{urlServer}}/events
+Content-Type: application/json
+
+{
+    "organizerId": "3353c485-46ba-483b-9d74-379940192044",
+    "name": "Awesome Drama",
+    "description": "Awesome Drama Description...",
+    "type": "TEATRO",
+    "allotedTickets": "50",
+    "eventDate": "2026-02-01T18:00:00",
+    "expectedDuration": "2026-02-01T23:00:00",
+    "startingSales": "2026-01-05T00:00:01",
+    "endingSales": "2026-01-31T23:59:59",
+    "price": "45"
+}
+
+
+### POST - Create new Event
+POST {{urlServer}}/events
+Content-Type: application/json
+
+{
+    "organizerId": "3353c485-46ba-483b-9d74-379940192044",
+    "name": "Awesome Festival 2026",
+    "description": "Awesome Festival 2026 Description...",
+    "type": "SHOW",
+    "allotedTickets": "200",
+    "eventDate": "2026-02-01T18:00:00",
+    "expectedDuration": "2026-02-01T23:00:00",
+    "startingSales": "2026-01-05T00:00:01",
+    "endingSales": "2026-01-31T23:59:59",
+    "price": "400"
+}
+
+### PATCH - Update Event
+PATCH {{urlServer}}/events/id/3f35449c-6954-47eb-a4da-084d3cf35dca
+Content-Type: application/json
+
+{
+    "organizerId": "3353c485-46ba-483b-9d74-379940192044",
+    "name": "Awesome Festival 2026 - Updated via PATCH!",
+    "description": "Awesome Festival 2026 Description...",
+    "type": "SHOW",
+    "allotedTickets": "500",
+    "eventDate": "2026-02-01T18:00:00",
+    "expectedDuration": "2026-02-01T23:00:00",
+    "startingSales": "2026-01-05T00:00:01",
+    "endingSales": "2026-01-31T23:59:59",
+    "price": "400"
+}
+
+
+### PATCH - Update Event
+PATCH {{urlServer}}/events/id/a9cce6c8-56a1-4a38-a46b-6d144d26f2ad
+Content-Type: application/json
+
+{
+    "type": "TEATRO"
+}
+
+### Delete - Delete Event
+DELETE {{urlServer}}/events
+Content-Type: application/json
+
+{
+    "eventId": "c117cc96-a973-45a2-99cf-33d4e21efc1a",
+    "organizerId": "3353c485-46ba-483b-9d74-379940192044"
+}
