@@ -106,3 +106,15 @@ Content-Type: application/json
     "eventId": "0f612268-9065-4ad2-ab5f-741dbe19dfd1",
     "userId": "3353c485-46ba-483b-9d74-379940192044"
 }
+
+
+
+# ------------------------------------
+# Users Client
+# ------------------------------------
+### GET - All users via Users Client 
+GET {{urlServer}}/clients/users
+
+
+### GET - User by id via Users Client 
+GET {{urlServer}}/clients/users/id/3353c485-46ba-483b-9d74-379940192045
