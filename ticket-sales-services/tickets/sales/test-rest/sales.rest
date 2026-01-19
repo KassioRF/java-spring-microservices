@@ -11,7 +11,7 @@ GET {{urlServer}}/events
 
 
 ### GET - Find by id
-GET {{urlServer}}/events/id/3f35449c-6954-47eb-a4da-084d3cf35dca
+GET {{urlServer}}/events/id/0f612268-9065-4ad2-ab5f-741dbe19dfd1
 
 
 ### GET - Find by Name
@@ -89,4 +89,20 @@ Content-Type: application/json
 {
     "eventId": "c117cc96-a973-45a2-99cf-33d4e21efc1a",
     "organizerId": "3353c485-46ba-483b-9d74-379940192044"
+}
+
+
+# ------------------------------------
+# Sales Routes
+# ------------------------------------
+### GET - All Sales
+GET {{urlServer}}/sales
+
+### POST - Request a new Sale
+POST {{urlServer}}/sales
+Content-Type: application/json
+
+{
+    "eventId": "0f612268-9065-4ad2-ab5f-741dbe19dfd1",
+    "userId": "3353c485-46ba-483b-9d74-379940192044"
 }

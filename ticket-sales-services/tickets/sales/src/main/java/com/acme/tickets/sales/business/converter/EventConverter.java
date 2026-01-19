@@ -44,4 +44,20 @@ public class EventConverter {
                 .build();
     }
 
+    public static EventEntity toEntity(EventDTO dto) {
+        return EventEntity.builder()
+                .id(dto.getId())
+                .organizerId(dto.getOrganizerId())
+                .name(dto.getName())
+                .description(dto.getDescription())
+                .type(dto.getType())
+                .allotedTickets(dto.getAllotedTickets())
+                .eventDate(dto.getEventDate())
+                .expectedDuration(dto.getExpectedDuration())
+                .startingSales(dto.getStartingSales())
+                .endingSales(dto.getEndingSales())
+                .price(dto.getPrice())
+                .build();
+    }
+
 }
