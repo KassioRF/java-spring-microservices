@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.acme.tickets.sales.business.service.SaleService;
 import com.acme.tickets.sales.controller.dto.sale.CreateSaleDTO;
+import com.acme.tickets.sales.controller.dto.sale.ProcessSaleDTO;
 import com.acme.tickets.sales.controller.dto.sale.SaleDTO;
 
 import lombok.RequiredArgsConstructor;
@@ -40,14 +41,24 @@ public class SaleController {
         return ResponseEntity.ok(service.getById(id));
     }
 
-    @GetMapping("event-sales/{eventId}")
+    @GetMapping("event/{eventId}")
     public ResponseEntity<List<SaleDTO>> getEventSales(@PathVariable UUID eventId) {
         return ResponseEntity.ok(service.getEventSales(eventId));
     }
 
-    @GetMapping("user-sales/{userId}")
+    @GetMapping("user/{userId}")
     public ResponseEntity<List<SaleDTO>> getUserSales(@PathVariable UUID userId) {
         return ResponseEntity.ok(service.getUserSales(userId));
+    }
+
+    @PostMapping("process-payment")
+    public ResponseEntity<SaleDTO> processPayment(@RequestBody ProcessSaleDTO payloadDTO) {
+        return ResponseEntity.ok(service.processSalePayment(payloadDTO));
+    }
+
+    @PostMapping("cancel")
+    public ResponseEntity<SaleDTO> cancelSale(@RequestBody ProcessSaleDTO payloadDTO) {
+        return ResponseEntity.ok(service.cancelSale(payloadDTO));
     }
 
 }

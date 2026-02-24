@@ -11,8 +11,10 @@ import com.acme.tickets.sales.business.converter.SaleConverter;
 import com.acme.tickets.sales.business.usecase.CreateSaleUseCase;
 import com.acme.tickets.sales.business.usecase.ListEventSalesUseCase;
 import com.acme.tickets.sales.business.usecase.ListUserSalesUseCase;
+import com.acme.tickets.sales.business.usecase.PaymentUseCase;
 import com.acme.tickets.sales.controller.dto.event.EventDTO;
 import com.acme.tickets.sales.controller.dto.sale.CreateSaleDTO;
+import com.acme.tickets.sales.controller.dto.sale.ProcessSaleDTO;
 import com.acme.tickets.sales.controller.dto.sale.SaleDTO;
 import com.acme.tickets.sales.enums.EnumSaleStatus;
 import com.acme.tickets.sales.exception.ServiceException;
@@ -31,6 +33,8 @@ public class SaleService {
     private final CreateSaleUseCase createUseCase;
     private final ListEventSalesUseCase listEventSalesUseCase;
     private final ListUserSalesUseCase listUserSalesUseCase;
+
+    private final PaymentUseCase paymentUseCase;
 
     public List<SaleDTO> getAll() {
         List<SaleEntity> items = repository.findAll();
@@ -79,23 +83,20 @@ public class SaleService {
 
     }
 
-    /**
-     * TODO:
-     * 
-     * - [x] Get Event Sales
-     * - [ ] Get User Sales
-     * - [ ] Process Sale (Confirm Payment and change status to PAID)
-     * - [ ] Cancel Sale (Process the cancellation of the sale. Requires to
-     * - [ ] refound payment then set status to REFUNDED)
-     * 
-     */
-
     public List<SaleDTO> getEventSales(UUID eventId) {
         return listEventSalesUseCase.execute(eventId);
     }
 
     public List<SaleDTO> getUserSales(UUID userId) {
         return listUserSalesUseCase.execute(userId);
+    }
+
+    public SaleDTO processSalePayment(ProcessSaleDTO payloadDTO) {
+        return paymentUseCase.processPayment(payloadDTO);
+    }
+
+    public SaleDTO cancelSale(ProcessSaleDTO payloadDTO) {
+        return paymentUseCase.cancelSale(payloadDTO);
     }
 
 }
