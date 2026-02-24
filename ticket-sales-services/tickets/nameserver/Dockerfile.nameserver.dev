@@ -1,0 +1,20 @@
+FROM eclipse-temurin:21-jdk-alpine
+
+WORKDIR /app
+
+# Instala bash (mvnw precisa)
+RUN apk add --no-cache bash
+
+# Copia apenas arquivos necessários para baixar dependências
+COPY mvnw .
+COPY .mvn .mvn
+COPY pom.xml .
+
+# Permissão execução
+RUN chmod +x mvnw
+
+# Baixa dependências (cache layer)
+RUN ./mvnw dependency:go-offline
+
+
+CMD ["./mvnw", "spring-boot:run"]

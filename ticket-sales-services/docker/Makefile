@@ -1,16 +1,17 @@
 # Compose build, up and down
 
-ENVFILE=.env.example
-COMPOSE_FILE=compose-db.yml
+ENVFILE=.env.local
+# COMPOSE_FILE=compose-db.yml
+COMPOSE_FILE=compose-dev.yml
 
 compose-up:
-	docker-compose -f $(COMPOSE_FILE) --env-file $(ENVFILE) up -d
+	docker compose -f $(COMPOSE_FILE) --env-file $(ENVFILE) up -d
 
 compose-down:
-	docker-compose -f $(COMPOSE_FILE) --env-file $(ENVFILE) down
+	docker compose -f $(COMPOSE_FILE) --env-file $(ENVFILE) down
 
 compose-build:
-	docker-compose -f $(COMPOSE_FILE) --env-file $(ENVFILE) build --no-cache
+	docker compose -f $(COMPOSE_FILE) --env-file $(ENVFILE) build --no-cache
 
 compose-logs:
-	docker-compose -f $(COMPOSE_FILE) --env-file $(ENVFILE) logs -f
+	docker compose -f $(COMPOSE_FILE) --env-file $(ENVFILE) logs -f

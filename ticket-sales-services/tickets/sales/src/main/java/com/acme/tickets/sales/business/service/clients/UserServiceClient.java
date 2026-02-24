@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.acme.tickets.sales.business.service.clients.dtos.UserServiceDTO;
 
-@FeignClient(name = "users-service", url = "http://localhost:3000")
+@FeignClient(name = "users-service")
 public interface UserServiceClient {
 
     @GetMapping("/users")
