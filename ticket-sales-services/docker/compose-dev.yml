@@ -1,0 +1,119 @@
+services:
+
+  # -------------
+  # Users Service
+  # -------------
+  users-service:
+    build:
+      context: ../tickets/users
+      dockerfile: Dockerfile.users.dev
+    container_name: users-service
+    volumes:
+      - ../tickets/users:/app
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USERS: ${DB_USERS}
+      DB_USERS_OWNER: ${DB_USERS_OWNER}
+      DB_USERS_PASSWORD: ${DB_USERS_PASSWORD}
+    ports:
+    - "3000:80"  
+    networks:
+      - backend
+    depends_on:
+      pg-dbms:
+        condition: service_healthy
+      nameserver-service:
+        condition: service_healthy
+
+  # -------------
+  # Sales Service
+  # -------------
+  sales-service:
+    build:
+      context: ../tickets/sales
+      dockerfile: Dockerfile.sales.dev
+    container_name: sales-service
+    volumes:
+      - ../tickets/sales:/app
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_SALES: ${DB_SALES}
+      DB_SALES_OWNER: ${DB_SALES_OWNER}
+      DB_SALES_PASSWORD: ${DB_SALES_PASSWORD}
+    ports:
+      - "4000:80"
+    networks:
+      - backend
+    depends_on:
+      pg-dbms:
+        condition: service_healthy
+      nameserver-service:
+        condition: service_healthy
+  
+  # -------------
+  # Name Server
+  # -------------
+  nameserver-service:
+    build:
+      context: ../tickets/nameserver
+      dockerfile: Dockerfile.nameserver.dev
+    container_name: nameserver-service
+    volumes:
+      - ../tickets/nameserver:/app      
+    networks:
+      - backend
+    ports:
+      - "8761:8761"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://nameserver-service:8761/"]
+      interval: 5s
+      timeout: 3s
+      start_period: 3s
+      retries: 10   
+
+  # -------------
+  # DBMS
+  # -------------
+  pg-dbms:
+    image: postgres:17.6-alpine3.22
+    container_name: pg-dbms
+    restart: unless-stopped
+    environment:
+      DB_PORT: ${DB_PORT}
+      # Admin User
+      POSTGRES_USER: ${DB_ADMIN_USER}
+      POSTGRES_PASSWORD: ${DB_ADMIN_PASSWORD}
+      # App Users DB      
+      DB_USERS: ${DB_USERS}
+      DB_USERS_OWNER: ${DB_USERS_OWNER}
+      DB_USERS_PASSWORD: ${DB_USERS_PASSWORD}
+      # App Sales DB
+      DB_SALES: ${DB_SALES}
+      DB_SALES_OWNER: ${DB_SALES_OWNER}
+      DB_SALES_PASSWORD: ${DB_SALES_PASSWORD}
+      # App Notifications DB
+      DB_NOTIFICATIONS: ${DB_NOTIFICATIONS}
+      DB_NOTIFICATIONS_OWNER: ${DB_NOTIFICATIONS_OWNER}
+      DB_NOTIFICATIONS_PASSWORD: ${DB_NOTIFICATIONS_PASSWORD}      
+    ports:
+      - "9876:${DB_PORT}"
+    networks:
+      - backend    
+    volumes:
+      - ./volumes/pg_data:/var/lib/postgresql/data
+      # entrypoints
+      - ./database:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_ADMIN_USER}"]
+      interval: 5s
+      timeout: 3s
+      start_period: 3s
+      retries: 10
+
+
+
+
+networks:
+  backend:
