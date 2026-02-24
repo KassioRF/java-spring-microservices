@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.acme.tickets.sales.business.converter.EventConverter;
 import com.acme.tickets.sales.business.converter.SaleConverter;
 import com.acme.tickets.sales.business.usecase.CreateSaleUseCase;
+import com.acme.tickets.sales.business.usecase.ListEventSalesUseCase;
 import com.acme.tickets.sales.controller.dto.event.EventDTO;
 import com.acme.tickets.sales.controller.dto.sale.CreateSaleDTO;
 import com.acme.tickets.sales.controller.dto.sale.SaleDTO;
@@ -27,6 +28,7 @@ public class SaleService {
     private final ISaleRepository repository;
     private final EventService eventService;
     private final CreateSaleUseCase createUseCase;
+    private final ListEventSalesUseCase listEventSalesUseCase;
 
     public List<SaleDTO> getAll() {
         List<SaleEntity> items = repository.findAll();
@@ -62,16 +64,6 @@ public class SaleService {
 
     }
 
-    /**
-     * TODO:
-     * 
-     * - Process Sale (Confirm Payment and change status to PAID)
-     * - Get Sales By EventId
-     * - Cancel Sale (Process the cancellation of the sale. Requires to
-     * - refound payment then set status to REFUNDED)
-     * 
-     */
-
     public SaleDTO getById(UUID uuid) {
         Optional<SaleEntity> entity = repository.findById(uuid);
 
@@ -83,6 +75,20 @@ public class SaleService {
 
         return dto;
 
+    }
+
+    /**
+     * TODO:
+     * 
+     * - [ ] Get Sales By EventId
+     * - [ ] Process Sale (Confirm Payment and change status to PAID)
+     * - [ ] Cancel Sale (Process the cancellation of the sale. Requires to
+     * - [ ] refound payment then set status to REFUNDED)
+     * 
+     */
+
+    public List<SaleDTO> getEventSales(UUID eventId) {
+        return listEventSalesUseCase.execute(eventId);
     }
 
 }

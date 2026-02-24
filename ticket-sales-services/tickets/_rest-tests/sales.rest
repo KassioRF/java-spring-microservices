@@ -95,9 +95,6 @@ Content-Type: application/json
 # ------------------------------------
 # Sales Routes
 # ------------------------------------
-### GET - All Sales
-GET {{urlServer}}/sales
-
 ### POST - Request a new Sale
 POST {{urlServer}}/sales
 Content-Type: application/json
@@ -117,9 +114,17 @@ Content-Type: application/json
 }
 
 
+### GET - All Sales
+GET {{urlServer}}/sales
 
-### GET - getByiD
+
+### GET - getById
 GET {{urlServer}}/sales/id/ba50c16a-84bb-4131-ace6-f7c1cd0acb76
+
+
+### GET - Event Sales
+GET {{urlServer}}/sales/event-sales/0f612268-9065-4ad2-ab5f-741dbe19dfd1
+
 
 
 # ------------------------------------
