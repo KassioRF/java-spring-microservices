@@ -126,6 +126,9 @@ GET {{urlServer}}/sales/id/ba50c16a-84bb-4131-ace6-f7c1cd0acb76
 GET {{urlServer}}/sales/event-sales/0f612268-9065-4ad2-ab5f-741dbe19dfd1
 
 
+### GET - User Sales
+GET {{urlServer}}/sales/user-sales/3353c485-46ba-483b-9d74-379940192045
+
 
 # ------------------------------------
 # Users Client

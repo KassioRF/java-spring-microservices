@@ -12,4 +12,6 @@ public interface ISaleRepository extends JpaRepository<SaleEntity, UUID> {
 
     List<SaleEntity> findByEvent(EventEntity event);
 
+    List<SaleEntity> findByUserId(UUID userId);
+
 }

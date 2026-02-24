@@ -45,4 +45,9 @@ public class SaleController {
         return ResponseEntity.ok(service.getEventSales(eventId));
     }
 
+    @GetMapping("user-sales/{userId}")
+    public ResponseEntity<List<SaleDTO>> getUserSales(@PathVariable UUID userId) {
+        return ResponseEntity.ok(service.getUserSales(userId));
+    }
+
 }
