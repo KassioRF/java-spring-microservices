@@ -103,10 +103,23 @@ POST {{urlServer}}/sales
 Content-Type: application/json
 
 {
-    "eventId": "0f612268-9065-4ad2-ab5f-741dbe19dfd1",
+    "userId": "3353c485-46ba-483b-9d74-379940192045",
+    "eventId": "0f612268-9065-4ad2-ab5f-741dbe19dfd1"
+}
+
+### POST - Request a new Sale invalid
+POST {{urlServer}}/sales
+Content-Type: application/json
+
+{
+    "eventId": "0f612268-9065-4ad2-ab5f-741dbe19dfd2",
     "userId": "3353c485-46ba-483b-9d74-379940192044"
 }
 
+
+
+### GET - getByiD
+GET {{urlServer}}/sales/id/ba50c16a-84bb-4131-ace6-f7c1cd0acb76
 
 
 # ------------------------------------
