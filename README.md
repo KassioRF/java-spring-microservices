@@ -17,18 +17,6 @@ Implemented in a backend composed of some microservices, along with a web-based 
 - React (TypeScript)
 - Microservices Architecture
 
-### 📁 Project Structure
-
-```bash
-.
-├── ticket-sales-services/   # Backend microservices for event and ticket management
-├── ticket-sales-web/        # Admin web interface for management and visualization
-```
-
-### Status
-
-[🚧 WIP] Features are being rolled out gradually. Check out Issues and PRs.
-
 
 ## References
 
