@@ -1,6 +1,16 @@
 # Atividade Prática 01: Micro serviço Venda de Ingressos
 
-Documentação referente à entrega da atividade prática 01: Micro serviço de Venda de Ingressos
+Documentação referente à entrega da atividade prática 01: Micro serviço de Venda de Ingressos.
+
+
+Os marcos do desenvolvimento desta tarefa podem ser identificados pelos seguintes PRs:
+
+- PR#2: Inicialização dos bancos de dados
+- PR#5: Inicialização do serviço de usuários
+- PR#6: Refinamento do serviço de usuários
+- PR#7: Inicialização do serviço de vendas e nameserver
+- PR#8: Dockerização dos serviços
+- PR#9: Finalização das regras de negócio do serviço de vendas
 
 ## Como executar
 
@@ -28,7 +38,6 @@ ticket-sales-services/
     ├── sales           # Serviço implementado nessa atividade
     └── users           # Serviço implementado a partir das aulas
 ```
-
 
 Os serviços de banco de dados (PostgreSQL), ``users-service``; ``sales-service`` e ``nameserver`` rodam em containers e são orquestrados via docker compose. 
 
