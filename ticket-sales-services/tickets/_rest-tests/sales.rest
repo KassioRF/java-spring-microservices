@@ -167,13 +167,3 @@ Content-Type: application/json
 ### GET - getById
 GET {{urlServer}}/sales/id/ad9043c8-4863-4a57-870d-5209291e4a49
 
-
-# ------------------------------------
-# Users Client: Just testing OpenFeignClient
-# ------------------------------------
-### GET - All users via Users Client 
-GET {{urlServer}}/clients/users
-
-
-### GET - User by id via Users Client 
-GET {{urlServer}}/clients/users/id/3353c485-46ba-483b-9d74-379940192045
