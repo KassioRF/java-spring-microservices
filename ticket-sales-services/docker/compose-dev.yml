@@ -73,6 +73,33 @@ services:
       start_period: 3s
       retries: 10   
 
+
+  # -------------
+  # Gateway
+  # -------------
+  gateway-service:
+    build:
+      context: ../tickets/gateway
+      dockerfile: Dockerfile.gateway.dev
+    container_name: gateway-service
+    volumes:
+      - ../tickets/gateway:/app      
+    networks:
+      - backend
+    ports:
+      - "8080:8080"
+    environment:
+      WEBAPP_URL: ${WEBAPP_URL}
+      NAMESERVER_URL: ${NAMESERVER_URL}
+      GATEWAY_WEBAPP_TOKEN: ${GATEWAY_WEBAPP_TOKEN}
+    # healthcheck:
+    #   test: ["CMD", "wget", "--spider", "http://gateway-service:8080/"]
+    #   interval: 5s
+    #   timeout: 3s
+    #   start_period: 3s
+    #   retries: 10   
+
+
   # -------------
   # DBMS
   # -------------
