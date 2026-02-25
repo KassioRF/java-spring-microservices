@@ -14,6 +14,10 @@ import com.acme.tickets.sales.business.service.clients.dtos.UserServiceDTO;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * @TODO:
+ *        For testing purposes only. Will be removed in the future.
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("clients/users")

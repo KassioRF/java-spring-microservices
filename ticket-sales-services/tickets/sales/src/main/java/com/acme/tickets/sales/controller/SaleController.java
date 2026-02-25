@@ -1,16 +1,19 @@
 package com.acme.tickets.sales.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.acme.tickets.sales.business.service.SaleService;
 import com.acme.tickets.sales.controller.dto.sale.CreateSaleDTO;
+import com.acme.tickets.sales.controller.dto.sale.ProcessSaleDTO;
 import com.acme.tickets.sales.controller.dto.sale.SaleDTO;
 
 import lombok.RequiredArgsConstructor;
@@ -30,6 +33,32 @@ public class SaleController {
     @PostMapping
     public ResponseEntity<SaleDTO> create(@RequestBody CreateSaleDTO payloadDTO) {
         return ResponseEntity.ok(service.create(payloadDTO));
+
+    }
+
+    @GetMapping("id/{id}")
+    public ResponseEntity<SaleDTO> getById(@PathVariable UUID id) {
+        return ResponseEntity.ok(service.getById(id));
+    }
+
+    @GetMapping("event/{eventId}")
+    public ResponseEntity<List<SaleDTO>> getEventSales(@PathVariable UUID eventId) {
+        return ResponseEntity.ok(service.getEventSales(eventId));
+    }
+
+    @GetMapping("user/{userId}")
+    public ResponseEntity<List<SaleDTO>> getUserSales(@PathVariable UUID userId) {
+        return ResponseEntity.ok(service.getUserSales(userId));
+    }
+
+    @PostMapping("process-payment")
+    public ResponseEntity<SaleDTO> processPayment(@RequestBody ProcessSaleDTO payloadDTO) {
+        return ResponseEntity.ok(service.processSalePayment(payloadDTO));
+    }
+
+    @PostMapping("cancel")
+    public ResponseEntity<SaleDTO> cancelSale(@RequestBody ProcessSaleDTO payloadDTO) {
+        return ResponseEntity.ok(service.cancelSale(payloadDTO));
     }
 
 }

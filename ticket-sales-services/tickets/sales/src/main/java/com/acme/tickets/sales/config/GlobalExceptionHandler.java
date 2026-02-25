@@ -6,12 +6,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.acme.tickets.sales.exception.ServiceException;
+import com.acme.tickets.sales.exception.UseCaseException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(ServiceException.class)
-    public ResponseEntity<String> handleServiceException(ServiceException serviceException) {
-        String message = "[" + serviceException.getClass().getSimpleName() + " ]";
+    @ExceptionHandler({ ServiceException.class, UseCaseException.class })
+    public ResponseEntity<String> handleServiceException(RuntimeException serviceException) {
+        String message = "[" + serviceException.getClass().getSimpleName() + "]";
         message += " Error: " + serviceException.getMessage();
         return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }

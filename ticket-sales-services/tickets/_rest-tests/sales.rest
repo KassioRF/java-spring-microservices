@@ -95,26 +95,75 @@ Content-Type: application/json
 # ------------------------------------
 # Sales Routes
 # ------------------------------------
-### GET - All Sales
-GET {{urlServer}}/sales
-
 ### POST - Request a new Sale
 POST {{urlServer}}/sales
 Content-Type: application/json
 
 {
     "eventId": "0f612268-9065-4ad2-ab5f-741dbe19dfd1",
-    "userId": "3353c485-46ba-483b-9d74-379940192044"
+    "userId": "3353c485-46ba-483b-9d74-379940192045"
+}
+
+### POST - Request a new Sale invalid
+POST {{urlServer}}/sales
+Content-Type: application/json
+
+{
+    "eventId": "0f612268-9065-4ad2-ab5f-741dbe19dfd2",
+    "userId": "3353c485-46ba-483b-9d74-379940192045"
+}
+
+
+### GET - All Sales
+GET {{urlServer}}/sales
+
+
+### GET - getById
+GET {{urlServer}}/sales/id/ba50c16a-84bb-4131-ace6-f7c1cd0acb76
+
+
+### GET - Event Sales
+GET {{urlServer}}/sales/event/0f612268-9065-4ad2-ab5f-741dbe19dfd1
+
+
+### GET - User Sales
+GET {{urlServer}}/sales/user/3353c485-46ba-483b-9d74-379940192045
+
+# ----------------------
+# Sale Status Actions
+# -----------------------
+### POST - process Payment
+POST {{urlServer}}/sales/process-payment
+Content-Type: application/json
+
+{    
+    "userId": "3353c485-46ba-483b-9d74-379940192045",
+    "saleId": "f56d13e6-decd-4926-bb8d-0e18ec1d0878"
+}
+
+### POST - Cancel a Paid Sale: Status changes to REFUNDED
+POST {{urlServer}}/sales/cancel
+Content-Type: application/json
+
+{    
+    "userId": "3353c485-46ba-483b-9d74-379940192045",
+    "saleId": "f56d13e6-decd-4926-bb8d-0e18ec1d0878"
 }
 
 
 
-# ------------------------------------
-# Users Client
-# ------------------------------------
-### GET - All users via Users Client 
-GET {{urlServer}}/clients/users
+
+### POST - Cancel a Open Sale: Status changes to CANCELLED
+POST {{urlServer}}/sales/cancel
+Content-Type: application/json
+
+{    
+    "userId": "3353c485-46ba-483b-9d74-379940192045",
+    "saleId": "33b2716f-b5a4-450b-9d99-1889a0b80beb"
+}
 
 
-### GET - User by id via Users Client 
-GET {{urlServer}}/clients/users/id/3353c485-46ba-483b-9d74-379940192045
+
+### GET - getById
+GET {{urlServer}}/sales/id/ad9043c8-4863-4a57-870d-5209291e4a49
+
