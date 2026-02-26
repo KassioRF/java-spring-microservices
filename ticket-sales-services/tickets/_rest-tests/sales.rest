@@ -56,6 +56,19 @@ Content-Type: application/json
     "price": "400"
 }
 
+### 
+POST {{urlServer}}/events
+Content-Type: application/json
+
+{
+    "organizerId": "3353c485-46ba-483b-9d74-379940192044",
+    "name": "Awesome Drama",
+    "description": "Awesome Drama Description...",
+    "type": "TEATRO",
+    "eventDate": "2026-02-01T18:00:00",
+    "price": "45"
+}
+
 ### PATCH - Update Event
 PATCH {{urlServer}}/events/id/3f35449c-6954-47eb-a4da-084d3cf35dca
 Content-Type: application/json
@@ -167,3 +180,24 @@ Content-Type: application/json
 ### GET - getById
 GET {{urlServer}}/sales/id/ad9043c8-4863-4a57-870d-5209291e4a49
 
+
+# -------------
+# New: Update status manual
+# -------------
+### POST - Update Status to PAID
+POST {{urlServer}}/sales/status
+Content-Type: application/json
+
+{    
+    "saleId": "33b2716f-b5a4-450b-9d99-1889a0b80beb",
+    "status": "PAID"
+}
+
+### POST - Update Status to REFUND
+POST {{urlServer}}/sales/status
+Content-Type: application/json
+
+{    
+    "saleId": "33b2716f-b5a4-450b-9d99-1889a0b80beb",
+    "status": "REFUNDED"
+}

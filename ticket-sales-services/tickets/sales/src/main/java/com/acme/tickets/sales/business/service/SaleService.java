@@ -16,7 +16,7 @@ import com.acme.tickets.sales.controller.dto.event.EventDTO;
 import com.acme.tickets.sales.controller.dto.sale.CreateSaleDTO;
 import com.acme.tickets.sales.controller.dto.sale.ProcessSaleDTO;
 import com.acme.tickets.sales.controller.dto.sale.SaleDTO;
-import com.acme.tickets.sales.enums.EnumSaleStatus;
+import com.acme.tickets.sales.controller.dto.sale.UpdateSaleStatusDTO;
 import com.acme.tickets.sales.exception.ServiceException;
 import com.acme.tickets.sales.infraestructure.entity.SaleEntity;
 import com.acme.tickets.sales.infraestructure.repository.ISaleRepository;
@@ -61,7 +61,6 @@ public class SaleService {
         SaleEntity entity = SaleConverter.toEntity(validatedDto);
 
         entity.setEvent(EventConverter.toEntity(eventDTO));
-        entity.setStatus(EnumSaleStatus.OPEN);
 
         // Save Sale
         entity = repository.save(entity);
@@ -97,6 +96,23 @@ public class SaleService {
 
     public SaleDTO cancelSale(ProcessSaleDTO payloadDTO) {
         return paymentUseCase.cancelSale(payloadDTO);
+    }
+
+    // new
+    public SaleDTO updateSaleStatus(UpdateSaleStatusDTO payloadDTO) {
+        Optional<SaleEntity> optionalEntity = repository.findById(payloadDTO.getSaleId());
+
+        if (optionalEntity.isEmpty()) {
+            throw new ServiceException("Sale not found");
+        }
+
+        SaleEntity entity = optionalEntity.get();
+        entity.setStatus(payloadDTO.getStatus());
+
+        entity = repository.save(entity);
+
+        return SaleConverter.toDTO(entity);
+
     }
 
 }

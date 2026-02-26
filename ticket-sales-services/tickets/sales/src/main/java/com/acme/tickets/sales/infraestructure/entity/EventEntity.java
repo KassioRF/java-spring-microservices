@@ -45,7 +45,7 @@ public class EventEntity {
     @Column(nullable = false)
     private EnumEventType type;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Integer allotedTickets;
 
     @Column(nullable = false)
@@ -57,7 +57,9 @@ public class EventEntity {
     @Column(nullable = false)
     private Float price;
 
+    @Column(nullable = true)
     private LocalDateTime startingSales;
+    @Column(nullable = true)
     private LocalDateTime endingSales;
 
     private LocalDateTime createdAt;
