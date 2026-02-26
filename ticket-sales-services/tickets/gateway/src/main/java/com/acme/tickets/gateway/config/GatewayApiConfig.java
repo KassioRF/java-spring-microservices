@@ -15,12 +15,12 @@ public class GatewayApiConfig {
     @Bean
     public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("users", pred -> pred.path("/api/users/**")
-                        .filters(f -> f.rewritePath("/api/users", "/users"))
+                .route("users-api", r -> r.path("/api/users/**")
+                        .filters(f -> f.rewritePath("/api/users/?(?<segment>.*)", "/${segment}"))
                         .uri("lb://users-service"))
 
-                .route("sales", pred -> pred.path("/api/sales/**")
-                        .filters(f -> f.rewritePath("/api/sales", "/sales"))
+                .route("sales-api", r -> r.path("/api/sales/**")
+                        .filters(f -> f.rewritePath("/api/sales/?(?<segment>.*)", "/${segment}"))
                         .uri("lb://sales-service"))
 
                 .route("webapp",
