@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CreateSaleDTO {
-    private UUID userId;
-    private UUID eventId;
+public class UpdateSaleStatusDTO {
+    private UUID saleId;
     private EnumSaleStatus status;
 }

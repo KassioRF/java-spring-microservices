@@ -49,7 +49,9 @@ public class SaleEntity {
 
     @PrePersist
     public void beforeSave() {
-        this.status = EnumSaleStatus.OPEN;
+        if (this.status == null) {
+            this.status = EnumSaleStatus.OPEN;
+        }
         this.dateTime = LocalDateTime.now();
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();

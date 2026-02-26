@@ -27,6 +27,7 @@ public class SaleConverter {
         return SaleEntity.builder()
                 .userId(dto.getUserId())
                 .event(EventEntity.builder().id(dto.getEventId()).build())
+                .status(dto.getStatus())
                 .build();
     }
 

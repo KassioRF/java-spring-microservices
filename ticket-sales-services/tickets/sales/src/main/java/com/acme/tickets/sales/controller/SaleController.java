@@ -15,6 +15,7 @@ import com.acme.tickets.sales.business.service.SaleService;
 import com.acme.tickets.sales.controller.dto.sale.CreateSaleDTO;
 import com.acme.tickets.sales.controller.dto.sale.ProcessSaleDTO;
 import com.acme.tickets.sales.controller.dto.sale.SaleDTO;
+import com.acme.tickets.sales.controller.dto.sale.UpdateSaleStatusDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -59,6 +60,11 @@ public class SaleController {
     @PostMapping("cancel")
     public ResponseEntity<SaleDTO> cancelSale(@RequestBody ProcessSaleDTO payloadDTO) {
         return ResponseEntity.ok(service.cancelSale(payloadDTO));
+    }
+
+    @PostMapping("status")
+    public ResponseEntity<SaleDTO> updateStatus(@RequestBody UpdateSaleStatusDTO payloadDTO) {
+        return ResponseEntity.ok(service.updateSaleStatus(payloadDTO));
     }
 
 }
